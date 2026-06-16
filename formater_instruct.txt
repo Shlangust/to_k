@@ -1,0 +1,10 @@
+program: $ProjectFileDir$\.venv\Scripts\python.exe
+arguments: -X utf8 $ProjectFileDir$\[path to file] "$SelectedText$"
+working direcktory - $ProjectFileDir$
+
+
+PyQt6
+mysql-connector-python
+pyinstaller
+Pillow
+pyqt6-tools
