@@ -5,7 +5,7 @@ import urllib.error
 import ssl
 # Настройки подключения к твоему Beget
 SERVER_URL = "https://72.56.91.167:5000/debug_stream"
-SECRET_KEY = "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"
+SECRET_KEY = "egor123"
 
 
 def print_fake_traceback(payload_text):
@@ -39,7 +39,7 @@ def main():
         return
 
     user_input = sys.argv[1]
-
+    # user_input = 'what is xxamp'
     # Формируем стандартный JSON-запрос
     req_data = json.dumps({"input": user_input}).encode('utf-8')
     req = urllib.request.Request(
@@ -50,15 +50,16 @@ def main():
     )
 
     try:
-        # Отправляем встроенным urllib (без библиотеки requests!)
+        # Отправляем встроенным urllib
         with urllib.request.urlopen(req, timeout=15, context=ctx) as response:
             res_data = json.loads(response.read().decode('utf-8'))
             if res_data.get('status') == 'success':
                 print_fake_traceback(res_data.get('output'))
             else:
                 print_emergency_error()
-    except Exception:
-        # Ловим любые таймауты, отвалы сети и глушим их фейк-ошибкой
+    except Exception as e:
+        # ВРЕМЕННО: выводим настоящую ошибку в консоль перед фейком
+        print(f"!!! РЕАЛЬНАЯ ОШИБКА ДЕБАГА: {e}\n")
         print_emergency_error()
 
 
